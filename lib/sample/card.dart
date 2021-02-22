@@ -3,23 +3,7 @@ import 'package:flutter/services.dart';
 // import 'package:m_karmik/login.dart';
 // import 'duty/duties.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Image Picker Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Menu(),
-    );
-  }
-}
-
-// ==========CHANGE BELOW THIS==============================
+void main() => runApp(Menu());
 
 class Menu extends StatefulWidget {
   @override
@@ -33,11 +17,12 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // title: Text('m-Karmik App'),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-                child: Text('Cards')
+                child: Text('m-Karmik App')
               // padding: const EdgeInsets.all(8.0), child: Text('m-Karmik App')
             ),
             Expanded(child: buildNicLogo(),),
@@ -112,6 +97,100 @@ class _MenuState extends State<Menu> {
                               )),
                         ],
                       ),
+                    ),
+                  ),
+
+
+                  Card(
+                    // card 3:CONTACT
+                    // color: Colors.white,
+                    color: Colors.yellowAccent,
+                    elevation: 8.0,
+                    // margin: EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+                    margin: EdgeInsets.all(10.0),
+                    child: Stack(
+                      children: <Widget>[
+                        // buildNicBanner(),
+                        Center(child: buildContact()),
+                        Container(
+                            margin: EdgeInsets.only(top: 135.0, left: 43.0),
+                            child: Text(
+                              'Contact Us',
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    // card 4:REPORT
+                    // color: Colors.white,
+                    color: Colors.redAccent,
+                    elevation: 8.0,
+                    // margin: EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+                    margin: EdgeInsets.all(10.0),
+                    child: Stack(
+                      children: <Widget>[
+                        // buildNicBanner(),
+                        Center(child: buildReport()),
+                        Container(
+                            margin: EdgeInsets.only(top: 135.0, left: 60.0),
+                            child: Text(
+                              'Report',
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    // card 5: HELP
+                    // color: Colors.white,
+                    color: Colors.purpleAccent,
+                    elevation: 8.0,
+                    // margin: EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+                    margin: EdgeInsets.all(10.0),
+                    child: Stack(
+                      children: <Widget>[
+                        // buildNicBanner(),
+                        Center(child: buildHelp()),
+                        Container(
+                            margin: EdgeInsets.only(top: 135.0, left: 67.0),
+                            child: Text(
+                              'Help',
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    // card 6: FAQ
+                    // color: Colors.white,
+                    color: Colors.greenAccent,
+                    elevation: 8.0,
+                    // margin: EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+                    margin: EdgeInsets.all(10.0),
+                    child: Stack(
+                      children: <Widget>[
+                        // buildNicBanner(),
+                        Center(child: buildFaq()),
+                        Container(
+                            margin: EdgeInsets.only(top: 135.0, left: 67.0),
+                            child: Text(
+                              'FAQ',
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ],
                     ),
                   ),
                 ],

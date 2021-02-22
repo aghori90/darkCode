@@ -56,25 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  /*@override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-          child: _image == null ? Text("Image is not loaded") : Image.file(_image)
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: getImage,
-        tooltip: 'Increment',
-        child: Icon(Icons.camera_alt),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
