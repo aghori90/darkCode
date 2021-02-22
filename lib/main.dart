@@ -35,54 +35,102 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  // storeing image"
   File _image;
+  /*String path;
+  bool map;*/
+  // picking image from camera:
   _imgFromCamera() async {
     File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50
-    );
+        source: ImageSource.camera, imageQuality: 50);
+    
+    // for path:
+    /*if (_image != null) {
+      image = _image.path.map((path) => File(path)).toList();
+      setState(() {});
+      print(image);
+    }*/
     setState(() {
       _image = image;
     });
   }
 
+  //picking image from gallery
   _imgFromGallery() async {
-    File image = await  ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50
-    );
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50);
     setState(() {
       _image = image;
     });
   }
 
-  /*@override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-          child: _image == null ? Text("Image is not loaded") : Image.file(_image)
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: getImage,
-        tooltip: 'Increment',
-        child: Icon(Icons.camera_alt),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+  // todo: Image Upload Widget
+  Widget buildImage() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'File Upload',
+          style: TextStyle(
+              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 5),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
+          height: 50,
+          child: TextFormField(
+            keyboardType: TextInputType.text,
+            // controller: _fileController,
+            validator: (String value) {
+              if (value.isEmpty) {
+                return 'Choose one File.';
+              }
+              return null;
+            },
+            style: TextStyle(
+              color: Colors.black87,
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14),
+              prefixIcon: Icon(
+                Icons.upload_file,
+                color: Color(0xff5ac18e),
+              ),
+              hintText: 'Choose File',
+              hintStyle: TextStyle(
+                color: Colors.black38,
+                fontWeight: FontWeight.bold,
+              ),
+              // icon: Icon(Icons.arrow_drop_down),
+            ),
+            onTap: () {
+              _showPicker(context);
+            },
+          ),
+        )
+      ],
     );
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Image Upload'),
+      ),
       body: Column(
         children: <Widget>[
-          SizedBox(
-            height: 32,
-          ),
+          SizedBox( height: 32,),
+          buildImage(),
+          Padding(padding: EdgeInsets.all(30.0)),
           Center(
             child: GestureDetector(
               onTap: () {
@@ -93,25 +141,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 backgroundColor: Color(0xffFDCF09),
                 child: _image != null
                     ? ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.file(
-                    _image,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.fitHeight,
-                  ),
-                )
+                        borderRadius: BorderRadius.circular(50),
+                        child: Image.file(
+                          _image,
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      )
                     : Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(50)),
-                  width: 100,
-                  height: 100,
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: Colors.grey[800],
-                  ),
-                ),
+                        decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(50)),
+                        width: 100,
+                        height: 100,
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: Colors.grey[800],
+                        ),
+                      ),
               ),
             ),
           )
@@ -131,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                      title: new Text('Photo Gallery'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
@@ -148,7 +196,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           );
-        }
-    );
+        });
   }
 }
