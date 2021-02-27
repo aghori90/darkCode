@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 // import 'package:m_karmik/login.dart';
 // import 'duty/duties.dart';
 
-void main() => runApp(Menu());
+// void main() => runApp(Menu());
 
 class Menu extends StatefulWidget {
   @override
