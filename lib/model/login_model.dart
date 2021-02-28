@@ -13,6 +13,16 @@ class LoginResponseModel {
       error: json["error"] != null ? json["error"] : "",
     );
   }
+
+  // linking from the shared_services.dart for storing purposes
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = {
+      'token': token.trim(),
+      'error': error.trim(),
+    };
+    return map;
+  }
+
 }
 // step:1
 class LoginRequestModel {

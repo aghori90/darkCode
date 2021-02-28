@@ -1,3 +1,4 @@
+import 'package:dark_flutter/shared_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../api/api_service.dart';
@@ -15,10 +16,13 @@ class _LoginPageState extends State<LoginPage> {
   LoginRequestModel loginRequestModel;
   bool isApiCallProcess = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
     loginRequestModel = new LoginRequestModel();
+    loginRequestModel.email = "eve.holt@reqres.in";
+    loginRequestModel.password = "cityslicka";
   }
 
   // for progressHUD: for loader
@@ -44,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                  margin: EdgeInsets.symmetric(vertical: 85, horizontal: 20),
+                  margin: EdgeInsets.symmetric(vertical: 130, horizontal: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Theme.of(context).primaryColor,
@@ -64,9 +68,12 @@ class _LoginPageState extends State<LoginPage> {
                           "Login",
                           style: Theme.of(context).textTheme.headline2,
                         ),
+
+                        // Email input form field
                         SizedBox(height: 20),
                         new TextFormField(
                           keyboardType: TextInputType.emailAddress,
+                          initialValue: loginRequestModel.email,
                           onSaved: (input) => loginRequestModel.email = input,
                           validator: (input) => !input.contains('@')
                               ? "Email Id should be valid"
@@ -87,12 +94,16 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
+
+                        // password Text form field
                         SizedBox(height: 20),
                         new TextFormField(
                           style:
-                          TextStyle(color: Theme.of(context).accentColor),
+                              TextStyle(color: Theme.of(context).accentColor),
                           keyboardType: TextInputType.text,
-                          onSaved: (input) => loginRequestModel.password = input,
+                          initialValue: loginRequestModel.password,
+                          onSaved: (input) =>
+                              loginRequestModel.password = input,
                           validator: (input) => input.length < 3
                               ? "Password should be more than 3 characters"
                               : null,
@@ -127,14 +138,16 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         SizedBox(height: 30),
+                        // Login button
                         FlatButton(
                           padding: EdgeInsets.symmetric(
                               vertical: 12, horizontal: 80),
                           onPressed: () {
                             if (validateAndSave()) {
                               print(loginRequestModel.toJson());
+
+                              // passing parameter for progress
                               setState(() {
-                                // passing parameter for progress
                                 isApiCallProcess = true;
                               });
 
@@ -146,12 +159,15 @@ class _LoginPageState extends State<LoginPage> {
                                   setState(() {
                                     isApiCallProcess = false;
                                   });
-                              // response to the user received from the server
+                                  // response to the user received from the server
                                   if (value.token.isNotEmpty) {
                                     final snackBar = SnackBar(
                                         content: Text("Login Successful"));
                                     scaffoldKey.currentState
                                         .showSnackBar(snackBar);
+                                    // calling the shared services and setting the login details
+                                    SharedService.setLoginDetails(value);
+                                    Navigator.of(context).pushReplacementNamed('/home');
                                   } else {
                                     final snackBar =
                                         SnackBar(content: Text(value.error));
